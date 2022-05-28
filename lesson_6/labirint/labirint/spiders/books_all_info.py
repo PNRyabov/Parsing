@@ -19,6 +19,7 @@ class BooksAllInfoSpider(CrawlSpider):
 
     def parse_item(self, response):
         item = {}
+        item['ref'] = response.urljoin(response.xpath("//div[@class='product-cover__cover-wrapper']/a/@href").get())
         item['title'] = response.xpath(
             "//div[@id='product-about']/h2/text()").get().replace('Аннотация к книге ', '').replace("\"", '')
         # item['img'] = response.xpath("//div[@id='product-image']/img[@class='book-img-cover']/@data-original").get()
